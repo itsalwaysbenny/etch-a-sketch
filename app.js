@@ -1,5 +1,4 @@
 function makeBoard(x) {
-
     let board = document.querySelector(".board");
 
     board.style.gridTemplateColumns = `repeat(${x}, 1fr)`
@@ -11,4 +10,8 @@ function makeBoard(x) {
     };
 };
 
-makeBoard(200);
+makeBoard(16);
+
+function changeSize(value) {
+    makeBoard(value)
+};
