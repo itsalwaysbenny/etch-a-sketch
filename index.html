@@ -10,10 +10,11 @@
   <body>
     <h1>Etch-A-Sketch Board</h1>
     <div id="board" class="board"></div>
-    <div id="grid-size-input">
-      <input type="text" id="grid-size" placeholder="Grid Size?" onchange="changeSize(this.value)">
+    <div id="buttons">
+      <input type="text" id="grid-size" placeholder="Set Grid Size" onfocus="this.value" onchange="setGridSize(this.value)">
       <button>Set Grid Size</button>
     </div>
+    <button id="clear-grid">Clear Grid</button>
     <script src="app.js"></script>
   </body>
 </html>
