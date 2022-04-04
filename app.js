@@ -7,7 +7,7 @@ function makeBoard(x) {
   board.style.gridTemplateRows = `repeat(${x}, 1fr)`
   for (let i = 0; i < (x * x); i++) {
       let gridSquare = document.createElement("div");
-      gridSquare.classList.add("gridSquare");
+      gridSquare.id = "gridSquare";
       board.insertAdjacentElement("beforeend", gridSquare);
   };
 };
@@ -21,3 +21,13 @@ function changeSize(value) {
       makeBoard(value)
   }
 };
+
+// I did not expect this to be the correct Id to get
+//I was expecting it to be the gridSquare id
+let mouseOver = document.getElementById("board")
+
+mouseOver.addEventListener("mouseover", function(e) {
+  e.target.style.backgroundColor = "blue"
+});
+
+//function to clear board
