@@ -42,12 +42,10 @@ mouseOver.addEventListener("mouseover", function(e) {
 
 //function to clear board
 //deletes all inner divs as in make grid function above 
-//but leaves only 1 on the board and even new make grid does not
-//seem to change the colour back
+//creates a new grid with 16 same as first loading page
 function clearBoard() {
-  let board = document.querySelector(".board");
-  let squares = board.querySelectorAll("div");
-  squares.forEach((div) => div.remove());
-}
+  board.innerHTML = "";
+  makeBoard(16)
+};
 
 clearGrid.addEventListener("click", clearBoard);
