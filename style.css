@@ -1,6 +1,5 @@
 #board {
   display: grid;
-  background-color: lightblue;
   height: 500px;
   width: 500px;
 }
