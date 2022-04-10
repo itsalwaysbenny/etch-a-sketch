@@ -3,15 +3,15 @@ const DEAFULT_GRID_SIZE = 16;
 let currentGridSize = DEAFULT_GRID_SIZE;
 
 //setdefault for background and mouseover colours
-const DEFAULT_BACKGROUND_COLOUR = "#ffffff";
+const DEFAULT_BACKGROUND_COLOUR = "rgb(255, 255, 255)";
 let currentBackgroundColour = DEFAULT_BACKGROUND_COLOUR;
-const DEFAULT_MOUSEOVER_COLOUR = "#000000";
+const DEFAULT_MOUSEOVER_COLOUR = "rgb(0, 0, 0)";
 let currentMouseoverColour = DEFAULT_MOUSEOVER_COLOUR;
 
 //button for setting the new gridsize
 const gridSize = document.getElementById(["grid-size"])
 
-//I did not expect this to be the correct Id to get to change colour
+//I did not expect this to be the correct Id to get to draw on the board
 //I was expecting it to be the gridSquare id
 const mouseOver = document.getElementById("board")
 
@@ -20,6 +20,12 @@ const resetGrid = document.getElementById(["reset-grid"]);
 
 //clear grid button
 const clearGrid = document.getElementById(["clear-grid"]);
+
+//Button to change background colour to black
+const backgroundColorBlack = document.getElementById(["background-black"])
+
+//Option to change drawing colour to red
+const mouseoverRed = document.getElementById(["mouseover-red"])
 
 //function to create board
 function makeBoard(x) {
@@ -62,9 +68,10 @@ mouseOver.addEventListener("mouseover", function(e) {
 //creates a new grid with 16 same as first loading page
 function resetBoard() {
   currentGridSize = DEAFULT_GRID_SIZE;
-  console.log(currentGridSize)
+  currentBackgroundColour = DEFAULT_BACKGROUND_COLOUR;
+  currentMouseoverColour = DEFAULT_MOUSEOVER_COLOUR;
   board.innerHTML = "";
-  makeBoard(DEAFULT_GRID_SIZE)
+  makeBoard(currentGridSize)
 };
 
 resetGrid.addEventListener("click", resetBoard);
@@ -77,3 +84,23 @@ function clearBoard() {
 };
 
 clearGrid.addEventListener("click", clearBoard);
+
+//Colour Changing Buttons
+mouseoverRed.addEventListener("click", makeMouseoverRed);
+
+function makeMouseoverRed() {
+  currentMouseoverColour = "rgb(256, 0, 0)";
+}
+
+
+
+//Trying to change the background Colour
+//doesn't work yet
+backgroundColorBlack.addEventListener("click", makeBackgroundColourBlack);
+
+function makeBackgroundColourBlack() {
+  let board = document.querySelector(".board");
+  currentBackgroundColour = "rbg(0, 0, 0)";
+  let squares = board.querySelectorAll("div");
+  squares.forEach((div) => div.style.backgroundColor = currentBackgroundColour);
+};
