@@ -8,25 +8,6 @@ let currentBackgroundColour = DEFAULT_BACKGROUND_COLOUR;
 const DEFAULT_MOUSEOVER_COLOUR = "rgb(0, 0, 0)";
 let currentMouseoverColour = DEFAULT_MOUSEOVER_COLOUR;
 
-//button for setting the new gridsize
-const gridSize = document.getElementById(["grid-size"])
-
-//I did not expect this to be the correct Id to get to draw on the board
-//I was expecting it to be the gridSquare id
-const mouseOver = document.getElementById("board")
-
-//reset to default button
-const resetGrid = document.getElementById(["reset-grid"]);
-
-//clear grid button
-const clearGrid = document.getElementById(["clear-grid"]);
-
-//Button to change background colour to black
-const backgroundColorBlack = document.getElementById(["background-black"])
-
-//Option to change drawing colour to red
-const mouseoverRed = document.getElementById(["mouseover-red"])
-
 //function to create board
 function makeBoard(x) {
   let board = document.querySelector(".board");
@@ -45,10 +26,12 @@ function makeBoard(x) {
 //creates initial board when page starts
 makeBoard(DEAFULT_GRID_SIZE)
 
+//button for setting the new gridsize
+const gridSize = document.getElementById(["grid-size"])
+
 //allows change to number of squares in the grid
 function setGridSize(value) {
   currentGridSize = value;
-  console.log(currentGridSize)
   //clears input each time the function is run
   gridSize.value = ""
   if (value < 10 || value > 100) {
@@ -59,6 +42,10 @@ function setGridSize(value) {
 };
 
 //changes colour of individual squares on mouseover
+//I did not expect this to be the correct Id to get to draw on the board
+//I was expecting it to be the gridSquare id
+const mouseOver = document.getElementById("board")
+
 mouseOver.addEventListener("mouseover", function(e) {
   e.target.style.backgroundColor = currentMouseoverColour;
 });
@@ -66,6 +53,8 @@ mouseOver.addEventListener("mouseover", function(e) {
 //function to reset board
 //deletes all inner divs as in make grid function above 
 //creates a new grid with 16 same as first loading page
+const resetGrid = document.getElementById(["reset-grid"]);
+
 function resetBoard() {
   currentGridSize = DEAFULT_GRID_SIZE;
   currentBackgroundColour = DEFAULT_BACKGROUND_COLOUR;
@@ -77,30 +66,62 @@ function resetBoard() {
 resetGrid.addEventListener("click", resetBoard);
 
 //make a function to clear grid but keep same size
+//clear grid button
+const clearGrid = document.getElementById(["clear-grid"]);
+
 function clearBoard() {
-  console.log(currentGridSize);
   board.innerHTML = "";
   makeBoard(currentGridSize);
 };
 
 clearGrid.addEventListener("click", clearBoard);
 
-//Colour Changing Buttons
-mouseoverRed.addEventListener("click", makeMouseoverRed);
+//Eraser button
+const eraser = document.getElementById(["eraser"])
 
-function makeMouseoverRed() {
-  currentMouseoverColour = "rgb(256, 0, 0)";
+eraser.addEventListener("click", erase);
+
+function erase() {
+  currentMouseoverColour = currentBackgroundColour;
 }
 
+//Change the background Colour, erases all drawings
+const backgroundColorBlack = document.getElementById(["background-black"])
 
-
-//Trying to change the background Colour
-//doesn't work yet
 backgroundColorBlack.addEventListener("click", makeBackgroundColourBlack);
 
 function makeBackgroundColourBlack() {
+  currentMouseoverColour = "rgb(255, 255, 255)";
+  currentBackgroundColour = "rgb(0, 0, 0)";
   let board = document.querySelector(".board");
-  currentBackgroundColour = "rbg(0, 0, 0)";
   let squares = board.querySelectorAll("div");
   squares.forEach((div) => div.style.backgroundColor = currentBackgroundColour);
+};
+
+//Change the background Colour, erases all drawings
+const backgroundColorWhite = document.getElementById(["background-white"])
+
+backgroundColorWhite.addEventListener("click", makeBackgroundColourWhite);
+
+function makeBackgroundColourWhite() {
+  currentMouseoverColour = "rgb(0, 0, 0)";
+  currentBackgroundColour = "rgb(255, 255, 255)";
+  let board = document.querySelector(".board");
+  let squares = board.querySelectorAll("div");
+  squares.forEach((div) => div.style.backgroundColor = currentBackgroundColour);
+};
+
+//chooses a random colour to draw with
+const randomColour = document.getElementById(["mouseover-random"])
+
+randomColour.addEventListener("click", randomiseColour);
+
+function randomiseColour() {
+  let RGBColourR = (Math.floor( Math.random() * 256));
+  let RGBColourG = (Math.floor( Math.random() * 256));
+  let RGBColourB = (Math.floor( Math.random() * 256));
+  let colourRandom = `rgb(${RGBColourR},${RGBColourG},${RGBColourB})`;
+  console.log(currentMouseoverColour)
+  currentMouseoverColour = colourRandom;
+  console.log(currentMouseoverColour)
 };
