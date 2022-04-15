@@ -121,7 +121,14 @@ function randomiseColour() {
   let RGBColourG = (Math.floor( Math.random() * 256));
   let RGBColourB = (Math.floor( Math.random() * 256));
   let colourRandom = `rgb(${RGBColourR},${RGBColourG},${RGBColourB})`;
-  console.log(currentMouseoverColour)
   currentMouseoverColour = colourRandom;
-  console.log(currentMouseoverColour)
 };
+
+//choose a colour from the palette
+const chooseColour = document.getElementById(["mouseover-colour"]);
+
+chooseColour.onchange = (e) => selectColour(e.target.value)
+
+function selectColour(colour) {
+  currentMouseoverColour = colour;
+}
